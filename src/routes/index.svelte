@@ -1,11 +1,176 @@
 <script>
- 
+ import supabase from  "$lib/db";
  let timetable = {
-	Monday: [],
-	Tuesday: [],
-	Wednesday: [],
-	Thursday: [],
-	Friday: [],
+	Monday: [
+  	{
+    	name: "PH",
+    	period: 1,
+    	style: "",
+  	},
+  	{
+    	name: "PM",
+    	period: 1,
+    	style: "",
+  	},
+  	{
+    	name: "BI",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "R",
+    	period: 1,
+    	style: "table-success",
+  	},
+  	{
+    	name: "BM",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "M3",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "BC",
+    	period: 2,
+    	style: "",
+  	},
+	],
+	Tuesday: [
+  	{
+    	name: "PJPK",
+    	period: 1,
+    	style: "",
+  	},
+  	{
+    	name: "M3",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "BI",
+    	period: 1,
+    	style: "",
+  	},
+  	{
+    	name: "E",
+    	period: 1,
+    	style: "table-success",
+  	},
+  	{
+    	name: "BM",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "BC",
+    	period: 3,
+    	style: "",
+  	},
+  	{
+    	name: "PJPK",
+    	period: 1,
+    	style: "",
+  	},
+	],
+	Wednesday: [
+  	{
+    	name: "BC",
+    	period: 3,
+    	style: "",
+  	},
+  	{
+    	name: "PM",
+    	period: 1,
+    	style: "",
+  	},
+  	{
+    	name: "H",
+    	period: 1,
+    	style: "table-success",
+  	},
+  	{
+    	name: "PKS",
+    	period: 3,
+    	style: "",
+  	},
+  	{
+    	name: "BM",
+    	period: 2,
+    	style: "",
+  	},
+	],
+	Thursday: [
+  	{
+    	name: "SA",
+    	period: 1,
+    	style: "",
+  	},
+  	{
+    	name: "PJPK",
+    	period: 1,
+    	style: "",
+  	},
+  	{
+    	name: "BM",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "A",
+    	period: 1,
+    	style: "table-success",
+  	},
+  	{
+    	name: "PM",
+    	period: 1,
+    	style: "",
+  	},
+  	{
+    	name: "BC",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "M3",
+    	period: 2,
+    	style: "",
+  	},
+	],
+	Friday: [
+  	{
+    	name: "BI",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "BM",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "T",
+    	period: 1,
+    	style: "table-success",
+  	},
+  	{
+    	name: "BC",
+    	period: 2,
+    	style: "",
+  	},
+  	{
+    	name: "PM",
+    	period: 1,
+    	style: "",
+  	},
+  	{
+    	name: "SA",
+    	period: 2,
+    	style: "",
+  	},
+	],
   };
 
 
@@ -90,6 +255,14 @@ async function getEntries() {
 
 getEntries();
 
+// Logout Supabase
+async function logout() {
+	const { error } = await supabase.auth.signOut();
+
+	if (error) alert(error.message); // alert if error
+  }
+
+
 </script>
 
 <div class= "container mt-5" >
@@ -123,7 +296,7 @@ getEntries();
         </td>
         {/each}
         <td>
-          <button on:click={() => addTimeSlot("Monday")}>+</button>
+          <button class="btn" on:click={() => addTimeSlot("Monday")}>+</button>
         </td>
       </tr>
       <tr>
@@ -136,7 +309,7 @@ getEntries();
         </td>
         {/each}
         <td>
-          <button on:click={() => addTimeSlot("Tuesday")}>+</button>
+          <button class="btn" on:click={() => addTimeSlot("Tuesday")}>+</button>
         </td>
       </tr>
       <tr>
@@ -149,7 +322,7 @@ getEntries();
         </td>
         {/each}
         <td>
-          <button on:click={() => addTimeSlot("Wednesday")}>+</button>
+          <button class="btn" on:click={() => addTimeSlot("Wednesday")}>+</button>
         </td>
       </tr>
       <tr>
@@ -162,7 +335,7 @@ getEntries();
         </td>
         {/each}
         <td>
-          <button on:click={() => addTimeSlot("Thursday")}>+</button>
+          <button class="btn" on:click={() => addTimeSlot("Thursday")}>+</button>
         </td>
       <tr>
         <th scope="row" class = "table-dark">FRI</th>
@@ -174,7 +347,7 @@ getEntries();
       	</td>
     	{/each}
       <td>
-        <button on:click={() => addTimeSlot("Friday")}>+</button>
+        <button class="btn" on:click={() => addTimeSlot("Friday")}>+</button>
       </td>
       </tr>
     </tbody>
@@ -182,7 +355,7 @@ getEntries();
 </div>
   
 <div class="text-center mt-5">
-    <button class={"btn btn-secondary"}>Logout</button>
+    <button class="btn btn-secondary" on:click={logout}>Logout</button>
 </div>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
