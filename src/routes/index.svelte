@@ -1,5 +1,5 @@
 <script>
- import supabase from  "$lib/db";
+ import supabase from '$lib/db';
  let timetable = {
 	Monday: [
   	{
@@ -173,6 +173,37 @@
 	],
   };
 
+  
+function addTimeSlot(day){
+	if (day === "Monday") {
+  	timetable.Monday = [
+    	...timetable.Monday,
+    	{ name: "??", period: 1, style: "" },
+  	];
+	} else if (day === "Tuesday") {
+  	timetable.Tuesday = [
+    	...timetable.Tuesday,
+    	{ name: "??", period: 1, style: "" },
+  	];
+	} else if (day === "Wednesday") {
+  	timetable.Wednesday = [
+    	...timetable.Wednesday,
+    	{ name: "??", period: 1, style: "" },
+  	];
+	} else if (day === "Thursday") {
+  	timetable.Thursday = [
+    	...timetable.Thursday,
+    	{ name: "??", period: 1, style: "" },
+  	];
+	} else if (day === "Friday") {
+  	timetable.Friday = [
+    	...timetable.Friday,
+    	{ name: "??", period: 1, style: "" },
+  	];
+	}
+
+	}
+
 
 let curDay
 let curIndex
@@ -181,35 +212,6 @@ let curPeriod
 let curStyle
 
 
-    function  addTimeSlot(day){
-  if( day === "Monday"){
-    timetable.Monday = [
-    ...timetable.Monday,
-    { name: "??", period: 1, style: "" }
-  
-  ];
-  }
-else if (day==="Tuesday"){
-  timetable.Tuesday = [
-    ...timetable.Tuesday,
-    { name: "??", period: 1, style: "" }];
-}
-else if (day==="Wednesday"){
-  timetable.Wednesday = [
-    ...timetable.Wednesday,
-    { name: "??", period: 1, style: "" }];
-}
-else if (day==="Thursday"){
-  timetable.Thursday = [
-    ...timetable.Thursday,
-    { name: "??", period: 1, style: "" }];
-}
-else if (day==="Friday"){
-  timetable.Friday = [
-    ...timetable.Friday,
-    { name: "??", period: 1, style: "" }];
-}
-}
 function showCurData(day,index,name,period,style){
 curDay = day
 curIndex = index
@@ -219,16 +221,50 @@ curStyle = style
 }
 
 function deleteTimeSlot(day,index){
-	 timetable[day].splice(index,1);
-	 timetable=timetable;
-	 saveEntry();
+	if (day === "Monday") {
+  	timetable.Monday.splice(index, 1);
+  	timetable = timetable;
+	} else if (day === "Tuesday") {
+  	timetable.Tuesday.splice(index, 1);
+  	timetable = timetable;
+	} else if (day === "Wednesday") {
+  	timetable.Wednesday.splice(index, 1);
+  	timetable = timetable;
+	} else if (day === "Thursday") {
+  	timetable.Thursday.splice(index, 1);
+  	timetable = timetable;
+	} else if (day === "Friday") {
+  	timetable.Friday.splice(index, 1);
+  	timetable = timetable;
+	}
+      saveEntry();
+
   }
 
   function setTimeSlot(day,index,newName,newPeriod,newStyle){
-	  timetable [day] [index] . name = newName ;
-	  timetable [day] [index] . period = newPeriod ;
-	  timetable [day] [index] . style = newStyle ;
-	  saveEntry();
+	if (day === "Monday") {
+  	timetable.Monday[index].name = newName;
+  	timetable.Monday[index].period = newPeriod;
+  	timetable.Monday[index].style = newStyle;
+	} else if (day === "Tuesday") {
+  	timetable.Tuesday[index].name = newName;
+  	timetable.Tuesday[index].period = newPeriod;
+  	timetable.Tuesday[index].style = newStyle;
+	} else if (day === "Wednesday") {
+  	timetable.Wednesday[index].name = newName;
+  	timetable.Wednesday[index].period = newPeriod;
+  	timetable.Wednesday[index].style = newStyle;
+	} else if (day === "Thursday") {
+  	timetable.Thursday[index].name = newName;
+  	timetable.Thursday[index].period = newPeriod;
+  	timetable.Thursday[index].style = newStyle;
+	} else if (day === "Friday") {
+  	timetable.Friday[index].name = newName;
+  	timetable.Friday[index].period = newPeriod;
+  	timetable.Friday[index].style = newStyle;
+	}
+	saveEntry();
+	
   }
 
 // Upsert entry
@@ -357,10 +393,7 @@ async function logout() {
 <div class="text-center mt-5">
     <button class="btn btn-secondary" on:click={logout}>Logout</button>
 </div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Edit Time Slot
-</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="editTimeSlot" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

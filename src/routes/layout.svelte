@@ -1,3 +1,4 @@
+
 <script>
     import supabase from '$lib/db';
     import { page, session } from '$app/stores';
